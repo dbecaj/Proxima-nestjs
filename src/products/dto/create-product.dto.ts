@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsNumber, IsBoolean, IsOptional, IsDate } from 'class-validator'
 
-export class ProductDto {
+export class CreateProductDto {
     @IsNotEmpty()
     @IsString()
     readonly name: string;
