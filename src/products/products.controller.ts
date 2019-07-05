@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes, ValidationPipe, BadRequestException, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto'
 import { ProductsService } from './products.service';
@@ -25,18 +25,33 @@ export class ProductsController {
     // Returns a product with the specified id
     @Get(":id")
     async get(@Param() params: IdParam): Promise<Product> {
-        return this.productsService.get(params.id);
+        var product = await this.productsService.get(params.id);
+        if (!product) {
+            throw new NotFoundException(`Product with the id ${params.id} does not exist!`)
+        }
+
+        return product;
     }
 
     // Removes the product with the specified id
     @Delete(":id")
     async delete(@Param() params: IdParam): Promise<Product> {
-        return this.productsService.delete(params.id);
+        var product = await this.productsService.delete(params.id);
+        if (!product) {
+            throw new NotFoundException(`Product with the id ${params.id} does not exist!`)
+        }
+
+        return product;
     }
 
     // Updates the product with the specified id
     @Put(":id")
     async update(@Body() productDto: UpdateProductDto, @Param() params: IdParam): Promise<Product> {
-        return this.productsService.update(params.id, productDto);
+        var product = await this.productsService.update(params.id, productDto);
+        if (!product) {
+            throw new NotFoundException(`Product with the id ${params.id} does not exist!`)
+        }
+
+        return product;
     }
 }
