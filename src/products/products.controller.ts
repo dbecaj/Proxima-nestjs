@@ -1,24 +1,7 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ProductDto } from './dto/product.dto';
 import { ProductsService } from './products.service';
 import { Product } from './interfaces/product.interface';
-
-/*
-// Returns a list of products
-router.get('/products', productController.productsReadList);
-
-// Creates a product
-router.post('/product', productController.productCreatePost);
-
-// Returns a product with the specified id
-router.get('/product/:id', productController.productReadGet);
-
-// Removes the product with the specified id
-router.delete('/product/:id', productController.productDelete);
-
-// Updates the product with the specified id
-router.put('/product/:id', productController.productUpdatePost);
-*/
 
 @Controller('products')
 export class ProductsController {
@@ -32,20 +15,24 @@ export class ProductsController {
 
     // Creates a product
     @Post()
+    @UsePipes(new ValidationPipe())
     async create(@Body() productDto: ProductDto) {
-        this.productsService.create(productDto);
+        return this.productsService.create(productDto);
     }
 
+    // Returns a product with the specified id
     @Get(":id")
     async get(@Param("id") id): Promise<Product> {
         return this.productsService.get(id);
     }
 
+    // Removes the product with the specified id
     @Delete(":id")
     async delete(@Param("id") id): Promise<Product> {
         return this.productsService.delete(id);
     }
 
+    // Updates the product with the specified id
     @Put(":id")
     async update(@Param("id") id): Promise<Product> {
         return this.update(id);

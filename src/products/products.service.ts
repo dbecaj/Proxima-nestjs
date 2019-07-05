@@ -9,12 +9,13 @@ export class ProductsService {
 
     // Returns a list of products
     async getAll(): Promise<Product[]> {
-        throw new Error("Not implemented!");
+        return await this.productModel.find().exec();
     }
 
     // Creates a product
     async create(productDto: ProductDto): Promise<Product> {
-        throw new Error("Not implemented!");
+        const newProduct = new this.productModel(productDto);
+        return await newProduct.save();
     }
 
     // Returns a product with the specified id
