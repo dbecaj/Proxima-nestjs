@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes, ValidationPipe, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes, ValidationPipe, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto'
 import { ProductsService } from './products.service';
