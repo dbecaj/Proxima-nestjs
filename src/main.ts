@@ -9,7 +9,7 @@ async function bootstrap() {
   // Setup Swagger for products API
   const options = new DocumentBuilder()
       .setTitle('Proxima NestJS Example')
-      .setDescription('API for CRUD operations on products')
+      .setDescription('API for CRUD operations on products.')
       .setVersion('1.0')
       .addTag('products')
       .build();

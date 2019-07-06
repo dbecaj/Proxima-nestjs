@@ -31,7 +31,6 @@ export class CreateProductDto {
 
     @ApiModelProperty({
         description: "Holds the date the product was created.",
-        type: Date,
         required: false,
         default: Date.now.toString(),
         example: "Sat Jul 06 2019 12:20:01 GMT+0200 (Central European Summer Time)",
