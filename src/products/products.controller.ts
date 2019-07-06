@@ -4,7 +4,7 @@ import { UpdateProductDto } from './dto/update-product.dto'
 import { ProductsService } from './products.service';
 import { Product } from './interfaces/product.interface';
 import { IdParam } from './validation/IdParam';
-import { ApiOkResponse, ApiUseTags, ApiCreatedResponse, ApiNotFoundResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiOkResponse, ApiUseTags, ApiCreatedResponse, ApiNotFoundResponse, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 
 @ApiUseTags('products')
 @Controller('products')
@@ -31,6 +31,7 @@ export class ProductsController {
     // Returns a product with the specified id
     @Get(":id")
     @ApiOperation({ title: 'Get the product with the specified {id}' })
+    @ApiImplicitParam({ name: "id", type: String })
     @ApiOkResponse({ description: 'The product was successfuly retrieved.' })
     @ApiNotFoundResponse({ description: 'Product with the {id} does not exist!' })
     async get(@Param() params: IdParam): Promise<Product> {
@@ -45,6 +46,7 @@ export class ProductsController {
     // Removes the product with the specified id
     @Delete(":id")
     @ApiOperation({ title: 'Remove the product with the specified {id}' })
+    @ApiImplicitParam({ name: "id", type: String })
     @ApiOkResponse({ description: 'The product was successfuly deleted.' })
     @ApiNotFoundResponse({ description: 'Product with the {id} does not exist!' })
     async delete(@Param() params: IdParam): Promise<Product> {
@@ -59,6 +61,7 @@ export class ProductsController {
     // Updates the product with the specified id
     @Put(":id")
     @ApiOperation({ title: 'Update the product with the specified {id}' })
+    @ApiImplicitParam({ name: "id", type: String })
     @ApiOkResponse({ description: 'The product was successfuly updated.' })
     @ApiNotFoundResponse({ description: 'Product with the {id} does not exist!' })
     async update(@Body() productDto: UpdateProductDto, @Param() params: IdParam): Promise<Product> {
